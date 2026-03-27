@@ -576,7 +576,6 @@ aside.show {
   padding: 20px;
   background: linear-gradient(135deg, var(--main-color), #2bc584);
   color: white;
-  position: sticky;
   top: 0;
   z-index: 3001;
 }
@@ -903,7 +902,6 @@ aside.show {
 }
 
 .sidebar-overlay.show {
-  display: block;
   opacity: 1;
 }
 
@@ -1213,6 +1211,7 @@ aside ul li a {
   text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.4;
@@ -1706,8 +1705,7 @@ footer .payment-methods img {
   opacity: 1;
   transform: translateX(0);
   right: 10px;
-}
-  transform: translateX(0);
+ transform: translateX(0);
 }
 
 /* Media Queries */
