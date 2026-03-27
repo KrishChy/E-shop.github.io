@@ -56,53 +56,6 @@
         </div>
     </div>
 
-    <!-- Filter and Sort Section -->
-    <section class="filter-section">
-        <div class="filter-container">
-            <div class="filter-group">
-                <label><i class="fa-solid fa-filter"></i> Filter:</label>
-                <select id="category-filter" onchange="applyFilters()">
-                    <option value="all">All Categories</option>
-                    <option value="tshirts">T-Shirts</option>
-                    <option value="jeans">Jeans</option>
-                    <option value="dresses">Dresses</option>
-                    <option value="blazers">Blazers</option>
-                    <option value="jackets">Jackets</option>
-                    <option value="sweaters">Sweaters</option>
-                    <option value="sweatshirts">Sweatshirts</option>
-                    <option value="shorts">Shorts</option>
-                    <option value="tops">Tops</option>
-                    <option value="bottoms">Bottoms</option>
-                    <option value="accessories">Accessories</option>
-                </select>
-                <select id="price-filter" onchange="applyFilters()">
-                    <option value="all">All Prices</option>
-                    <option value="0-30">Under $30</option>
-                    <option value="30-60">$30 - $60</option>
-                    <option value="60-100">$60 - $100</option>
-                    <option value="100-999">$100+</option>
-                </select>
-                <select id="rating-filter" onchange="applyFilters()">
-                    <option value="0">All Ratings</option>
-                    <option value="4">4+ Stars</option>
-                    <option value="3">3+ Stars</option>
-                </select>
-            </div>
-            <div class="sort-group">
-                <label><i class="fa-solid fa-sort"></i> Sort:</label>
-                <select id="sort-select" onchange="applyFilters()">
-                    <option value="default">Default</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="name">Name: A-Z</option>
-                    <option value="rating">Highest Rated</option>
-                    <option value="newest">Newest</option>
-                </select>
-            </div>
-            <button class="btn-clear" onclick="clearFilters()"><i class="fa-solid fa-times"></i> Clear Filters</button>
-        </div>
-    </section>
-
     <!-- Voucher Section -->
     <section class="voucher-section">
         <div class="section-title">
@@ -147,6 +100,53 @@
                 <!-- Hot selling products will be loaded here -->
             </div>
             <button class="scroll-btn scroll-right" onclick="scrollHotSelling(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- Filter and Sort Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-group">
+                <label><i class="fa-solid fa-filter"></i> Filter:</label>
+                <select id="category-filter" onchange="applyFilters()">
+                    <option value="all">All Categories</option>
+                    <option value="tshirts">T-Shirts</option>
+                    <option value="jeans">Jeans</option>
+                    <option value="dresses">Dresses</option>
+                    <option value="blazers">Blazers</option>
+                    <option value="jackets">Jackets</option>
+                    <option value="sweaters">Sweaters</option>
+                    <option value="sweatshirts">Sweatshirts</option>
+                    <option value="shorts">Shorts</option>
+                    <option value="tops">Tops</option>
+                    <option value="bottoms">Bottoms</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <select id="price-filter" onchange="applyFilters()">
+                    <option value="all">All Prices</option>
+                    <option value="0-30">Under $30</option>
+                    <option value="30-60">$30 - $60</option>
+                    <option value="60-100">$60 - $100</option>
+                    <option value="100-999">$100+</option>
+                </select>
+                <select id="rating-filter" onchange="applyFilters()">
+                    <option value="0">All Ratings</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="3">3+ Stars</option>
+                </select>
+            </div>
+            <div class="sort-group">
+                <label><i class="fa-solid fa-sort"></i> Sort:</label>
+                <select id="sort-select" onchange="applyFilters()">
+                    <option value="default">Default</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A-Z</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </div>
+            <button class="btn-clear" onclick="clearFilters()"><i class="fa-solid fa-times"></i> Clear Filters</button>
         </div>
     </section>
 
