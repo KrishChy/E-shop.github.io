@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-SHOP - Your Favorites</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/x-icon" href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+</head>
+
+<body>
+
+    <div class="top" id="top"></div>
+    <nav id="navbar"></nav>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside id="menu"></aside>
+
+    <div class="back-home">
+        <a href="index.html"> <i class="fa-solid fa-chevron-left"></i> Back to Home</a>
+    </div>
+
+    <div id="cart-box">
+        <h1><i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Your Favorites</h1>
+        <table id="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Add to Cart</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody id="fav-items"></tbody>
+        </table>
+        <div style="text-align:center; margin-top:2rem;">
+            <a href="index.html" class="btn"><i class="fas fa-shopping-bag"></i> Continue Shopping</a>
+        </div>
+    </div>
+
+    <footer id="footer"></footer>
+
+    <script src="product.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

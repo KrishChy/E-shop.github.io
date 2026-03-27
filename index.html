@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-SHOP - Your Online Store</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/x-icon" href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <h2><i class="fa-solid fa-bag-shopping"></i> E-SHOP</h2>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup()">&times;</button>
+            <h2>Welcome to E-SHOP!</h2>
+            <p>Your one-stop online shopping destination</p>
+            <img src="img/home-img.png" alt="Welcome">
+            <button class="btn popup-btn" onclick="closePopup()">Start Shopping</button>
+        </div>
+    </div>
+
+    <div class="top" id="top"></div>
+
+    <nav id="navbar"></nav>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside id="menu"></aside>
+
+    <div class="home-banner">
+        <div class="texts">
+            <h3>Hot Promotion</h3>
+            <h2>Fashion Tranding</h2>
+            <h1>Great Collection</h1>
+            <p>Save some more with coupons & upto 20% off</p>
+            <button id="shop-now-btn" class="btn">Shop Now</button>
+        </div>
+        <div class="img-div">
+            <img src="img/home-img.png" alt="home image" />
+        </div>
+    </div>
+
+    <!-- Filter and Sort Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-group">
+                <label><i class="fa-solid fa-filter"></i> Filter:</label>
+                <select id="category-filter" onchange="applyFilters()">
+                    <option value="all">All Categories</option>
+                    <option value="tshirts">T-Shirts</option>
+                    <option value="jeans">Jeans</option>
+                    <option value="dresses">Dresses</option>
+                    <option value="blazers">Blazers</option>
+                    <option value="jackets">Jackets</option>
+                    <option value="sweaters">Sweaters</option>
+                    <option value="sweatshirts">Sweatshirts</option>
+                    <option value="shorts">Shorts</option>
+                    <option value="tops">Tops</option>
+                    <option value="bottoms">Bottoms</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <select id="price-filter" onchange="applyFilters()">
+                    <option value="all">All Prices</option>
+                    <option value="0-30">Under $30</option>
+                    <option value="30-60">$30 - $60</option>
+                    <option value="60-100">$60 - $100</option>
+                    <option value="100-999">$100+</option>
+                </select>
+                <select id="rating-filter" onchange="applyFilters()">
+                    <option value="0">All Ratings</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="3">3+ Stars</option>
+                </select>
+            </div>
+            <div class="sort-group">
+                <label><i class="fa-solid fa-sort"></i> Sort:</label>
+                <select id="sort-select" onchange="applyFilters()">
+                    <option value="default">Default</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A-Z</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </div>
+            <button class="btn-clear" onclick="clearFilters()"><i class="fa-solid fa-times"></i> Clear Filters</button>
+        </div>
+    </section>
+
+    <!-- Voucher Section -->
+    <section class="voucher-section">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-ticket"></i> Exclusive Vouchers</h2>
+        </div>
+        <div class="voucher-container">
+            <div class="voucher-card" onclick="copyVoucher('FIRST20')">
+                <div class="voucher-value">20% OFF</div>
+                <div class="voucher-code">FIRST20</div>
+                <div class="voucher-desc">On your first order</div>
+                <span class="voucher-copy"><i class="fa-solid fa-copy"></i> Copy</span>
+            </div>
+            <div class="voucher-card" onclick="copyVoucher('SAVE30')">
+                <div class="voucher-value">$30 OFF</div>
+                <div class="voucher-code">SAVE30</div>
+                <div class="voucher-desc">Orders over $100</div>
+                <span class="voucher-copy"><i class="fa-solid fa-copy"></i> Copy</span>
+            </div>
+            <div class="voucher-card" onclick="copyVoucher('FLASH50')">
+                <div class="voucher-value">50% OFF</div>
+                <div class="voucher-code">FLASH50</div>
+                <div class="voucher-desc">Limited time offer</div>
+                <span class="voucher-copy"><i class="fa-solid fa-copy"></i> Copy</span>
+            </div>
+            <div class="voucher-card" onclick="copyVoucher('FREE99')">
+                <div class="voucher-value">FREE SHIP</div>
+                <div class="voucher-code">FREE99</div>
+                <div class="voucher-desc">Free shipping</div>
+                <span class="voucher-copy"><i class="fa-solid fa-copy"></i> Copy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hot Selling Product Section -->
+    <section class="hot-selling-section">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-fire"></i> Hot Selling</h2>
+        </div>
+        <div class="hot-selling-wrapper">
+            <button class="scroll-btn scroll-left" onclick="scrollHotSelling(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="hot-selling-scroll" id="hot-selling-scroll">
+                <!-- Hot selling products will be loaded here -->
+            </div>
+            <button class="scroll-btn scroll-right" onclick="scrollHotSelling(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>All Products</h2>
+        </div>
+        <div class="products-center" id="product"></div>
+    </section>
+
+    <!-- Recently Viewed Section -->
+    <section class="recently-viewed" id="recently-viewed" style="display:none;">
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <h2><i class="fa-solid fa-envelope"></i> Subscribe to Our Newsletter</h2>
+            <p>Get the latest updates on new products and upcoming sales</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" id="newsletter-email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+            <p class="newsletter-note"><i class="fa-solid fa-lock"></i> We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="reviews-section">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-star"></i> Customer Reviews</h2>
+        </div>
+        <div class="reviews-wrapper">
+            <button class="review-scroll-btn review-scroll-left" onclick="scrollReviews(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="reviews-scroll" id="reviews-scroll">
+                <!-- Reviews will be loaded here -->
+            </div>
+            <button class="review-scroll-btn review-scroll-right" onclick="scrollReviews(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- Cookie Consent Bar -->
+    <div class="cookie-bar">
+        <span>This website uses cookies to improve user experience.</span>
+        <button class="accept-btn">Accept and close</button>
+    </div>
+
+    <footer id="footer"></footer>
+
+    <script src="product.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function applyFilters() {
+            let filtered = [...productItemsData];
+            
+            const category = document.getElementById('category-filter').value;
+            const price = document.getElementById('price-filter').value;
+            const rating = parseInt(document.getElementById('rating-filter').value);
+            const sort = document.getElementById('sort-select').value;
+            
+            if (category !== 'all') {
+                filtered = filtered.filter(p => p.category === category);
+            }
+            
+            if (price !== 'all') {
+                const [min, max] = price.split('-').map(Number);
+                filtered = filtered.filter(p => p.price >= min && p.price <= max);
+            }
+            
+            if (rating > 0) {
+                filtered = filtered.filter(p => p.rating >= rating);
+            }
+            
+            generateProduct(filtered, sort);
+        }
+        
+        function clearFilters() {
+            document.getElementById('category-filter').value = 'all';
+            document.getElementById('price-filter').value = 'all';
+            document.getElementById('rating-filter').value = '0';
+            document.getElementById('sort-select').value = 'default';
+            generateProduct();
+        }
+        
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletter-email').value;
+            let subscribers = JSON.parse(localStorage.getItem('subscribers')) || [];
+            if (!subscribers.includes(email)) {
+                subscribers.push(email);
+                localStorage.setItem('subscribers', JSON.stringify(subscribers));
+                showNotification('Thank you for subscribing!');
+                document.getElementById('newsletter-email').value = '';
+            } else {
+                showNotification('You are already subscribed!');
+            }
+        }
+        
+        function copyVoucher(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                showNotification('Voucher code ' + code + ' copied!');
+            }).catch(() => {
+                showNotification('Failed to copy!');
+            });
+        }
+        
+        function renderHotSelling() {
+            const hotProducts = productItemsData.slice(0, 6);
+            const container = document.getElementById('hot-selling-scroll');
+            if (container) {
+                container.innerHTML = hotProducts.map(product => createHotSellingCard(product)).join('');
+            }
+        }
+        
+        function createHotSellingCard(product) {
+            const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : 0;
+            return `
+                <div class="hot-selling-card">
+                    <div class="hot-badge"><i class="fa-solid fa-fire"></i> Hot</div>
+                    <div class="hot-product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="hot-product-details">
+                        <span class="hot-category">${product.categoryDisplay || product.category}</span>
+                        <h3>${product.name}</h3>
+                        <div class="hot-rating">
+                            ${getStars(product.rating)}
+                            <span>(${product.reviews.length} reviews)</span>
+                        </div>
+                        <p class="hot-description">${product.description}</p>
+                        <div class="hot-price">
+                            <span class="current">$${product.price.toFixed(2)}</span>
+                            ${product.oldPrice ? '<span class="old">$' + product.oldPrice.toFixed(2) + '</span>' : ''}
+                            ${discount > 0 ? '<span class="discount">-' + discount + '%</span>' : ''}
+                        </div>
+                        <div class="hot-stock">
+                            <i class="fa-solid fa-check"></i> In Stock (${product.stock} available)
+                        </div>
+                        <div class="hot-actions">
+                            <button class="btn" onclick="addToCart(${product.id})"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <button class="btn-wishlist" onclick="toggleFavorite(${product.id})">
+                                <i class="${isInFavorites(product.id) ? 'fas' : 'far'} fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function scrollHotSelling(direction) {
+            const container = document.getElementById('hot-selling-scroll');
+            if (container) {
+                const scrollAmount = 360;
+                container.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        function scrollReviews(direction) {
+            const container = document.getElementById('reviews-scroll');
+            if (container) {
+                const scrollAmount = 400;
+                container.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        function renderCustomerReviews() {
+            const reviews = [
+                { name: "Sarah Johnson", avatar: "S", rating: 5, text: "Amazing quality clothes! The fabric is so comfortable and the fit is perfect. Will definitely order again!", date: "2 days ago", product: "Casual Cotton T-Shirt" },
+                { name: "Mike Thompson", avatar: "M", rating: 5, text: "Fast delivery and excellent customer service. The jeans fit exactly as expected. Highly recommend!", date: "1 week ago", product: "Slim Fit Jeans" },
+                { name: "Emily Davis", avatar: "E", rating: 4, text: "Beautiful summer dress! The colors are exactly as shown. Slightly delayed shipping but overall happy.", date: "2 weeks ago", product: "Summer Floral Dress" },
+                { name: "James Wilson", avatar: "J", rating: 5, text: "Best online clothing store I've found. Great prices for premium quality. The blazer is stunning!", date: "3 weeks ago", product: "Formal Blazer" },
+                { name: "Lisa Anderson", avatar: "L", rating: 5, text: "Love my new hoodie! Super cozy and warm. Perfect for autumn weather. Great purchase!", date: "1 month ago", product: "Hooded Sweatshirt" },
+                { name: "David Martinez", avatar: "D", rating: 4, text: "Good quality denim jacket. Delivery was quick and the packaging was secure. Satisfied customer!", date: "1 month ago", product: "Denim Jacket" }
+            ];
+            
+            const container = document.getElementById('reviews-scroll');
+            if (container) {
+                container.innerHTML = reviews.map(review => `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">${review.avatar}</div>
+                            <div class="review-info">
+                                <h4>${review.name}</h4>
+                                <span class="review-product"><i class="fa-solid fa-shirt"></i> ${review.product}</span>
+                            </div>
+                            <div class="review-meta">
+                                <div class="review-stars">${getStars(review.rating)}</div>
+                                <span class="review-date">${review.date}</span>
+                            </div>
+                        </div>
+                        <p class="review-text">"${review.text}"</p>
+                        <div class="review-verified"><i class="fa-solid fa-check-circle"></i> Verified Purchase</div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            renderHotSelling();
+            renderCustomerReviews();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-SHOP - Jackets</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/x-icon" href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+</head>
+
+<body>
+
+    <div class="top" id="top"></div>
+    <nav id="navbar"></nav>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside id="menu"></aside>
+
+    <div class="back-home">
+        <a href="index.html"> <i class="fa-solid fa-chevron-left"></i> Back to Home</a>
+    </div>
+
+    <section class="products">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-vest-patches"></i> Jackets Collection</h2>
+        </div>
+        <div class="products-center" id="product"></div>
+    </section>
+
+    <footer id="footer"></footer>
+
+    <script src="product.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const productContainer = document.getElementById("product");
+            const filteredProducts = productItemsData.filter(p => p.category === "jackets");
+            
+            if (filteredProducts.length === 0) {
+                productContainer.innerHTML = '<p style="text-align:center; grid-column: 1/-1; padding: 2rem;">No jackets available yet!</p>';
+                return;
+            }
+            
+            productContainer.innerHTML = filteredProducts.map((x) => {
+                let { id, name, price, oldPrice, image, description, rating } = x;
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    stars += i <= rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+                }
+                return `<article class="product" data-id="${id}">
+                  <div class="img-container">
+                    <img src="${image}" alt="${name}" class="product-img" onclick="viewProduct(${id})" />
+                    <button class="fav-btn" data-id="${id}" onclick="toggleFavorite(${id})">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <button class="bag-btn" onclick="addToCart(${id})">
+                      <i class="fas fa-shopping-cart"></i>
+                      Add to Bag
+                    </button>
+                  </div>
+                  <h3 onclick="viewProduct(${id})">${name}</h3>
+                  <p>${description}</p>
+                  <p class="rating">${stars}</p>
+                  <h4>$${price.toFixed(2)} ${oldPrice ? `<span class="old-price">$${oldPrice.toFixed(2)}</span>` : ''}</h4>
+                </article>`;
+            }).join("");
+        });
+    </script>
+</body>
+
+</html>

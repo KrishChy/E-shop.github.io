@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-SHOP Product Details</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/x-icon" href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+    <style>
+        .review-section {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 1rem;
+            background: var(--white-color);
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+        }
+        
+        .review-section h2 {
+            margin-bottom: 1rem;
+            color: var(--mainBlack);
+            font-size: 1.3rem;
+        }
+        
+        .add-review-form {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .add-review-form h3 {
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .star-rating-input {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .star-rating-input i {
+            font-size: 20px;
+            cursor: pointer;
+            color: #ddd;
+            transition: 0.2s;
+        }
+        
+        .star-rating-input i.active,
+        .star-rating-input i:hover {
+            color: #f1c40f;
+        }
+        
+        .add-review-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        
+        .add-review-form textarea:focus {
+            border-color: var(--main-color);
+        }
+        
+        .review-item {
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+        
+        .review-item:last-child {
+            border-bottom: none;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .review-user {
+            font-weight: bold;
+            color: var(--mainBlack);
+            font-size: 14px;
+        }
+        
+        .review-date {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .review-rating {
+            color: #f1c40f;
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-rating i {
+            font-size: 12px;
+        }
+        
+        .review-comment {
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 13px;
+        }
+        
+        .related-products {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 1rem 2rem;
+            overflow-x: hidden;
+        }
+        
+        .related-products h2 {
+            margin-bottom: 1rem;
+            color: var(--mainBlack);
+            font-size: 1.3rem;
+        }
+        
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .qty-control button {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            cursor: pointer;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+        
+        .qty-control button:hover {
+            background: var(--main-color);
+            color: white;
+        }
+        
+        @media (max-width: 576px) {
+            .review-section {
+                padding: 1rem;
+                margin: 0.5rem;
+                border-radius: 15px;
+            }
+            
+            .review-section h2 {
+                font-size: 1.1rem;
+            }
+            
+            .add-review-form h3 {
+                font-size: 0.9rem;
+            }
+            
+            .star-rating-input i {
+                font-size: 18px;
+            }
+            
+            .related-products {
+                padding: 0 0.5rem 1.5rem;
+            }
+            
+            .related-products h2 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top" id="top"></div>
+    <nav id="navbar"></nav>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside id="menu"></aside>
+
+    <div class="back-home">
+        <a href="index.html"> <i class="fa-solid fa-chevron-left"></i> Back to Home</a>
+    </div>
+
+    <div class="product-details" id="product-details">
+        <p style="text-align:center; grid-column: 1/-1;">Loading product...</p>
+    </div>
+
+    <div class="review-section" id="review-section" style="display:none;">
+        <h2><i class="fa-solid fa-star"></i> Customer Reviews</h2>
+        <div class="add-review-form" id="add-review-form">
+            <h3>Write a Review</h3>
+            <div class="star-rating-input" id="star-input">
+                <i class="fa-solid fa-star" data-rating="1"></i>
+                <i class="fa-solid fa-star" data-rating="2"></i>
+                <i class="fa-solid fa-star" data-rating="3"></i>
+                <i class="fa-solid fa-star" data-rating="4"></i>
+                <i class="fa-solid fa-star" data-rating="5"></i>
+            </div>
+            <textarea id="review-comment" placeholder="Share your thoughts about this product..."></textarea>
+            <button class="btn" style="margin-top:1rem;" onclick="submitReview()">Submit Review</button>
+        </div>
+        <div id="reviews-list"></div>
+    </div>
+
+    <div class="related-products" id="related-products"></div>
+
+    <footer id="footer"></footer>
+
+    <script src="product.js"></script>
+    <script src="script.js"></script>
+    <script>
+        let selectedRating = 5;
+        let currentProductId = null;
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            currentProductId = urlParams.get('id');
+            
+            if (currentProductId) {
+                addToRecentlyViewed(parseInt(currentProductId));
+                loadProductDetails();
+            } else {
+                window.location.href = 'index.html';
+            }
+            
+            setupStarRating();
+        });
+        
+        function setupStarRating() {
+            const stars = document.querySelectorAll('#star-input i');
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    selectedRating = parseInt(star.dataset.rating);
+                    updateStarDisplay();
+                });
+                star.addEventListener('mouseover', () => {
+                    const rating = parseInt(star.dataset.rating);
+                    highlightStars(rating);
+                });
+                star.addEventListener('mouseout', () => {
+                    updateStarDisplay();
+                });
+            });
+        }
+        
+        function highlightStars(rating) {
+            const stars = document.querySelectorAll('#star-input i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+        
+        function updateStarDisplay() {
+            highlightStars(selectedRating);
+        }
+        
+        function loadProductDetails() {
+            const product = getProductById(currentProductId);
+            const detailsContainer = document.getElementById("product-details");
+            
+            if (product) {
+                const inCart = isInCart(product.id);
+                const inFav = isInFavorites(product.id);
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    stars += i <= product.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+                }
+                
+                detailsContainer.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" />
+                        ${product.oldPrice ? '<span class="sale-badge-large">SALE</span>' : ''}
+                    </div>
+                    <div class="product-info">
+                        <span class="category">${product.category}</span>
+                        <h1>${product.name}</h1>
+                        <p class="rating">${stars} <span style="color:#666; font-size:14px;">(${product.reviews.length} reviews)</span></p>
+                        <p class="price">
+                            $${product.price.toFixed(2)}
+                            ${product.oldPrice ? `<span class="old-price">$${product.oldPrice.toFixed(2)}</span>` : ''}
+                        </p>
+                        <p class="stock-status">${getStockStatus(product.stock)}</p>
+                        <p class="description">${product.description}</p>
+                        <div class="quantity-selector">
+                            <label>Quantity:</label>
+                            <div class="qty-control">
+                                <button onclick="changeQty(-1)">-</button>
+                                <input type="number" id="qty" value="1" min="1" max="${product.stock}" />
+                                <button onclick="changeQty(1)">+</button>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn" onclick="addToCartFromDetails(${product.id})" ${inCart ? 'disabled' : ''}>
+                                <i class="fas fa-shopping-cart"></i>
+                                ${inCart ? 'Already in Cart' : 'Add to Cart'}
+                            </button>
+                            <button class="btn" onclick="toggleFavorite(${product.id})" style="background:${inFav ? '#e74c3c' : '#36efa2'};">
+                                <i class="${inFav ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                                ${inFav ? 'Remove from Favorites' : 'Add to Favorites'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                renderReviews(product);
+                renderRelatedProducts(product);
+                document.getElementById("review-section").style.display = 'block';
+            } else {
+                detailsContainer.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">Product not found!</p>';
+            }
+        }
+        
+        function changeQty(delta) {
+            const input = document.getElementById('qty');
+            let val = parseInt(input.value) + delta;
+            const max = parseInt(input.max);
+            if (val >= 1 && val <= max) input.value = val;
+        }
+        
+        function addToCartFromDetails(id) {
+            const qty = document.getElementById('qty') ? parseInt(document.getElementById('qty').value) : 1;
+            const product = getProductById(id);
+            if (!product) return;
+            
+            let existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += qty;
+            } else {
+                cart.push({...product, quantity: qty});
+            }
+            
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartBadge();
+            showNotification(`${product.name} added to cart!`);
+            
+            const btn = document.querySelector('.action-buttons .btn:first-child');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Already in Cart';
+            }
+        }
+        
+        function renderReviews(product) {
+            const container = document.getElementById("reviews-list");
+            
+            if (product.reviews.length === 0) {
+                container.innerHTML = '<p style="color:#999; text-align:center;">No reviews yet. Be the first to review!</p>';
+                return;
+            }
+            
+            container.innerHTML = product.reviews.map(review => {
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    stars += i <= review.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+                }
+                return `
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="review-user"><i class="fa-solid fa-user"></i> ${review.user}</span>
+                            <span class="review-date">${review.date}</span>
+                        </div>
+                        <div class="review-rating">${stars}</div>
+                        <p class="review-comment">${review.comment}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderRelatedProducts(product) {
+            const container = document.getElementById("related-products");
+            const related = productItemsData.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+            
+            if (related.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            
+            container.innerHTML = `
+                <h2><i class="fa-solid fa-tags"></i> Related Products</h2>
+                <div class="products-center">
+                    ${related.map(x => `
+                        <article class="product" data-id="${x.id}">
+                          <div class="img-container">
+                            <img src="${x.image}" alt="${x.name}" class="product-img" onclick="viewProduct(${x.id})" />
+                            <button class="fav-btn" data-id="${x.id}" onclick="toggleFavorite(${x.id})">
+                              <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <button class="bag-btn" onclick="addToCart(${x.id})">
+                              <i class="fas fa-shopping-cart"></i>
+                              Add to Bag
+                            </button>
+                          </div>
+                          <h3 onclick="viewProduct(${x.id})">${x.name}</h3>
+                          <p>${x.description.substring(0, 50)}...</p>
+                          <h4>$${x.price.toFixed(2)}</h4>
+                        </article>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        function submitReview() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                if (confirm("Please login to submit a review. Go to login page?")) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+            
+            const comment = document.getElementById('review-comment').value.trim();
+            if (!comment) {
+                showNotification('Please enter your review');
+                return;
+            }
+            
+            const product = productItemsData.find(p => p.id === parseInt(currentProductId));
+            if (product) {
+                const alreadyReviewed = product.reviews.some(r => r.user === currentUser.name);
+                if (alreadyReviewed) {
+                    showNotification('You have already reviewed this product');
+                    return;
+                }
+                
+                product.reviews.push({
+                    user: currentUser.name,
+                    rating: selectedRating,
+                    comment: comment,
+                    date: new Date().toISOString().split('T')[0]
+                });
+                
+                let totalRating = product.reviews.reduce((sum, r) => sum + r.rating, 0);
+                product.rating = Math.round(totalRating / product.reviews.length);
+                
+                document.getElementById('review-comment').value = '';
+                showNotification('Review submitted successfully!');
+                renderReviews(product);
+                loadProductDetails();
+            }
+        }
+    </script>
+</body>
+
+</html>

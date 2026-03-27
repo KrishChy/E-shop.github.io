@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-SHOP - Your Cart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/x-icon" href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://logomakr.com/wp-content/uploads/2025/04/logo-maker-image.png" />
+    <style>
+        .coupon-section {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .coupon-section h3 {
+            margin-bottom: 1rem;
+            color: var(--mainBlack);
+        }
+        
+        .coupon-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .coupon-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        
+        .coupon-form input:focus {
+            border-color: var(--main-color);
+        }
+        
+        .coupon-list {
+            margin-top: 1rem;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .coupon-applied {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .coupon-applied button {
+            background: none;
+            border: none;
+            color: #155724;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .available-coupons {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .available-coupons h4 {
+            margin-bottom: 0.5rem;
+            color: var(--mainBlack);
+        }
+        
+        .coupon-code {
+            display: inline-block;
+            background: var(--main-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .cart-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--main-color);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top" id="top"></div>
+    <nav id="navbar"></nav>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside id="menu"></aside>
+
+    <div class="back-home">
+        <a href="index.html"> <i class="fa-solid fa-chevron-left"></i> Back to Home</a>
+    </div>
+
+    <div id="cart-box">
+        <h1><i class="fa-solid fa-shopping-cart"></i> Your Shopping Cart</h1>
+        
+        <div class="coupon-section">
+            <h3><i class="fa-solid fa-tag"></i> Have a Coupon?</h3>
+            <form class="coupon-form" onsubmit="applyCouponCode(event)">
+                <input type="text" id="coupon-code" placeholder="Enter coupon code">
+                <button type="submit" class="btn">Apply</button>
+            </form>
+            <div id="coupon-applied-msg"></div>
+            <div class="available-coupons">
+                <h4>Available Coupons:</h4>
+                <span class="coupon-code" onclick="useCoupon('SAVE10')">SAVE10 - 10% off</span>
+                <span class="coupon-code" onclick="useCoupon('SAVE20')">SAVE20 - 20% off</span>
+                <span class="coupon-code" onclick="useCoupon('FLAT50')">FLAT50 - $50 off</span>
+                <span class="coupon-code" onclick="useCoupon('NEWUSER')">NEWUSER - 15% off</span>
+            </div>
+        </div>
+        
+        <table id="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items"></tbody>
+        </table>
+        
+        <div id="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+            <div class="summary-row discount">
+                <span>Discount:</span>
+                <span id="discount">-$0.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Grand Total:</span>
+                <span id="grand-total">$0.00</span>
+            </div>
+            <div id="coupon-applied" class="coupon-applied" style="display:none;">
+                <i class="fa-solid fa-check-circle"></i> Applied: <span></span>
+                <button onclick="removeCoupon()"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <button onclick="checkout()" class="btn" style="margin-top:1rem; width:100%;"><i class="fa-solid fa-credit-card"></i> Proceed to Checkout</button>
+        </div>
+        
+        <div class="cart-actions">
+            <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a>
+            <button onclick="clearCart()" class="btn btn-outline" style="border-color:#e74c3c; color:#e74c3c;"><i class="fa-solid fa-trash"></i> Clear Cart</button>
+        </div>
+    </div>
+
+    <footer id="footer"></footer>
+
+    <script src="product.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function applyCouponCode(e) {
+            e.preventDefault();
+            const code = document.getElementById('coupon-code').value;
+            if (applyCoupon(code)) {
+                document.getElementById('coupon-code').value = '';
+                renderCart();
+            }
+        }
+        
+        function useCoupon(code) {
+            if (applyCoupon(code)) {
+                renderCart();
+            }
+        }
+        
+        function removeCoupon() {
+            clearAppliedCoupons();
+            renderCart();
+        }
+        
+        function clearCart() {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                cart = [];
+                clearAppliedCoupons();
+                saveCart();
+                renderCart();
+                showNotification('Cart cleared!');
+            }
+        }
+    </script>
+</body>
+
+</html>
