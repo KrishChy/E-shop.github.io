@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 <button id="search-btn"><i class="fa-solid fa-search"></i></button>
             </div>
             <div class="cart">
-                <a href="fav.html" title="Wishlist"><i class="fa-regular fa-heart"></i><sup class="fav-badge">0</sup></a>
-                <a href="cart.html" title="Cart"><i class="fas fa-shopping-cart"></i><sup>0</sup></a>
+                <a href="fav.html" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
+                <a href="cart.html" title="Cart"><i class="fas fa-shopping-cart"></i></a>
                 ${currentUser ? '<a href="profile.html" title="Profile" class="user-profile-btn"><i class="fa-solid fa-user-circle"></i></a>' : ''}
             </div>
             <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" onclick="toggleSidebar()">
